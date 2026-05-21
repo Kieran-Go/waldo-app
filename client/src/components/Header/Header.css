@@ -1,6 +1,6 @@
 /* Main container for header component */
 header{
-    background-color: beige;
+    background-color: var(--fg-color);
     border-bottom: rgba(0, 0, 0, 0.3) solid 1px;
     box-shadow: 0 4px 6px -1px #0003;
     position: sticky;
@@ -27,11 +27,11 @@ header a img{
 
 /* Header text */
 header a h1{
-    color: #4a8cff;
-    text-shadow: -2px 2px 4px rgba(0,0,0,.25);
+    color: var(--lt-blue);
+    text-shadow: var(--txt-shd);
 }
 
 /* Header text span */
 header a h1 span{
-    color: #ff3e3e;
+    color: var(--lt-red);
 }

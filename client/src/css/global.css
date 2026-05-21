@@ -1,3 +1,10 @@
+@import './variables.css';
+
+/* Styles for body */
+body{
+    background-color: var(--bg-color);
+}
+
 /* Styles for page content container */
 .page-content{
     min-height: 100vh;

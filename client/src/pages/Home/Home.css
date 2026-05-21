@@ -16,7 +16,8 @@
     border-radius: 12px;
     width: fit-content;
     box-shadow:4px 4px 10px #0003;
-    color: #4a8cff;
+    color: var(--lt-blue);
+    background-color: var(--fg-color);
     will-change: color, background-color, box-shadow;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     text-decoration: none;
@@ -24,9 +25,9 @@
     /* Hover psuedo-class for scene-card */
     .scene-card:hover{
         cursor: pointer;
-        background-color: #4a8cff;
+        background-color: var(--lt-blue);
         color: white;
-        box-shadow: 0px 0px 25px #4a8cff;
+        box-shadow: 0px 0px 25px var(--lt-blue);
     }
 
 /* Scene-card image */
@@ -38,6 +39,6 @@
 
 /* Scene-card h3 */
 .scene-card h3{
-    text-shadow: -2px 2px 4px rgba(0,0,0,.25);
+    text-shadow: var(--txt-shd);
     margin-left: 10px;
 }
