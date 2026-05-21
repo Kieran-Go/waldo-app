@@ -1,0 +1,43 @@
+/* Main container for all Scenes content */
+.scenes-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 25px;
+    column-gap: 15px;
+    padding: 40px 100px;
+}
+
+/* Container for an individual scene */
+.scene-card{
+    display: flex;
+    flex-direction: column;
+    font-style: italic;
+    border: solid 1px rgba(0,0,0,.25);
+    border-radius: 12px;
+    width: fit-content;
+    box-shadow:4px 4px 10px #0003;
+    color: #4a8cff;
+    will-change: color, background-color, box-shadow;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+    /* Hover psuedo-class for scene-card */
+    .scene-card:hover{
+        cursor: pointer;
+        background-color: #4a8cff;
+        color: white;
+        box-shadow: 0px 0px 25px #4a8cff;
+    }
+
+/* Scene-card image */
+.scene-card img{
+    width: 400px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+/* Scene-card h3 */
+.scene-card h3{
+    text-shadow: -2px 2px 4px rgba(0,0,0,.25);
+    margin-left: 10px;
+}
