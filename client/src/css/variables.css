@@ -3,8 +3,10 @@
     --bg-color: #eeeded;
     --fg-color: beige;
 
-    /* Text colors and shadows */
+    /* Colors and shadows */
     --lt-blue: #4a8cff;
     --lt-red: #ff3e3e;
+    --drk-red: #bb0404;
     --txt-shd: -2px 2px 4px rgba(0,0,0,.25);
+    --ui-shd: 4px 4px 10px #0003;
 }

@@ -1,3 +1,11 @@
+/* Container for all content on homepage */
+.home {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ----- SCENE GRID ----- */
 /* Main container for all Scenes content */
 .scenes-container{
     display: grid;
@@ -15,7 +23,7 @@
     border: solid 1px rgba(0,0,0,.25);
     border-radius: 12px;
     width: fit-content;
-    box-shadow:4px 4px 10px #0003;
+    box-shadow: var(--ui-shd);
     color: var(--lt-blue);
     background-color: var(--fg-color);
     will-change: color, background-color, box-shadow;
@@ -42,3 +50,57 @@
     text-shadow: var(--txt-shd);
     margin-left: 10px;
 }
+
+/* ----- FOOTER ----- */
+/* Main container for all footer content */
+.home-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--fg-color);
+    padding: 0 200px 30px 200px;
+    border-top: rgba(0, 0, 0, 0.3) solid 1px;
+    box-shadow: 0px -4px 6px #0003;
+    margin-top: auto;
+}
+
+/* Container for footer text */
+.footer-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+/* Footer-text link */
+.footer-text a{
+    color: var(--drk-red);
+    text-decoration: none;
+    margin-top: -30px;
+}
+    /* Psuedo-class hover for footer link */
+    .footer-text a:hover{
+        color: var(--lt-red);
+    }
+
+/* Shared font-size and text-shadow between footer-text and link */
+.footer-text, .footer-text a{
+    font-size: 1.5em;
+    text-shadow: var(--txt-shd);
+}
+
+/* Footer link-button */
+.home-footer .link-button{
+    text-decoration: none;
+    color: white;
+    background-color: var(--drk-red);
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    margin-top: 30px;
+    box-shadow: var(--ui-shd);
+}
+/* Footer link-button hover pseudo-class */
+    .home-footer .link-button:hover{
+        background-color: var(--lt-red);
+    }
