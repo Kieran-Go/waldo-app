@@ -1,0 +1,36 @@
+/* Container for error page content */
+.error-container{
+    border: rgb(0, 0, 0) solid 2px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    margin: auto;
+    padding: 30px 60px 30px 60px;
+    margin-top: 10%;
+    text-align: center;
+    background-color: var(--fg-color);
+    box-shadow: var(--ui-shd);
+    text-shadow: var(--txt-shd);
+}
+
+/* Error message */
+.error-message{
+    color: red;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+/* Back-to-home button/link */
+.error-container a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    border: solid black 1px;
+    padding: 6px;
+    border-radius: 12px;
+    box-shadow: var(--ui-shd);
+    background-color: var(--drk-red);
+}
+    .error-container a:hover{
+        background-color: var(--lt-red);
+    }

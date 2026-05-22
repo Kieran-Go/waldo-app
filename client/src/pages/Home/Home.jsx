@@ -1,9 +1,15 @@
 import Header from '../../components/Header/Header';
 import scenes from '../../mock_data/scene-data';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 import './Home.css';
 
 export default function Home(){
+  // Set document title on page load
+  useEffect(() => {
+    document.title = "Where's Waldo?";
+  }, []);
+
   // ----- RENDER -----
   return(
     <>
