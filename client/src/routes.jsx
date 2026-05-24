@@ -1,5 +1,5 @@
 import App from "./App";
-import ErrorPage from "./components/Error/ErrorPage";
+import ErrorPage from "./pages/Error/ErrorPage";
 import Home from "./pages/Home/Home";
 
 // Initialize the array of routes
