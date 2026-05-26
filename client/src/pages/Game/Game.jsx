@@ -1,7 +1,9 @@
 import "./Game.css";
 import { useParams } from "react-router-dom"
+import { useState, useEffect } from "react";
 import games from "../../mock_data/game-data";
 import characterImages from "../../utils/characterImages";
+import secondsToMinutes from "../../utils/secondsToMinutes";
 import Header from "../../components/Header/Header";
 import Loading from "../../components/Loading/Loading";
 
@@ -10,6 +12,23 @@ export default function Game() {
     // Fetch correct game using ID from params (Uses mock-data for now but must change to API fetch later)
     const { id } = useParams();
     const game = games[id];
+
+    // ----- STATES -----
+    const [gameEnd, setGameEnd] = useState(false); // Game End state
+    const [timer, setTimer] = useState(0); // Game timer state
+
+    // ----- EFFECTS -----
+    // Increment game timer each second using interval
+    useEffect(() => {
+        // Don't run timer while loading or game has ended
+        if(loading || gameEnd) return;
+        
+        const interval = setInterval(() => {
+            setTimer(prev => prev + 1);
+        }, 1000);
+
+        return () => clearInterval(interval);
+    },[loading, gameEnd]);
 
     // ----- RENDER -----
     // If still loading, render loading component
@@ -24,18 +43,27 @@ export default function Game() {
             {/* Render Header */}
             <Header />
 
-            {/* Render game content */}
-            <section className="game-container">
-                {/* PLACEHOLDER: Render the game scene ID and each character's image */}
-                <h1>{game.id}</h1>
+            <section className="game">
+                {/* Render game info */}
+                <div className="game-info">
+                    {/* Container for character images */}
+                    <div className="character-container">
+                        {game.characters.map((c) => (
+                            <img className="character-img"
+                                key={c.id}
+                                src={characterImages[c.id]}
+                                alt={c.name}
+                            />
+                        ))}
+                    </div>
+                    
+                    {/* Timer */}
+                    <p className="timer">{secondsToMinutes(timer)}</p>
+                </div>
 
-                {game.characters.map((c) => (
-                    <img className="character-img"
-                        key={c.id}
-                        src={characterImages[c.id]}
-                        alt={c.name}
-                    />
-                ))}
+                {/* Render game scene image */}
+                <img className="game-img" src={game.image} alt={`Image for ${game.name}`}/>
+                
             </section>
         </>
     );

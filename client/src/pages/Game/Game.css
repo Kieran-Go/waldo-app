@@ -1,3 +1,47 @@
+/* Styles for game info */
+.game-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 60px 0 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1001;
+    pointer-events: none;
+}
+
+/* Styles for character container in game info */
+.character-container{
+    display: flex;
+    gap: 30px;
+}
+
+/* Styles for character image */
 .character-img{
     width: 50px;
+    height: auto;
+    border: solid black 1px;
+    border-radius: 12px;
+    background-color: white;
+}
+    /* Reduce image opacity when character is found */
+    .character-img.found{
+        opacity: 0.2;
+    }
+
+/* Styles for timer */
+.timer{
+    color: var(--lt-red);
+    text-shadow: var(--txt-shd);
+    font-weight: bold;
+    font-style: italic;
+    font-size: 1.5em;
+}
+
+/* Styles for game image */
+.game-img{
+    width: 100%;
+    margin-top: 2px;
 }
