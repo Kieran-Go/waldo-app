@@ -5,6 +5,8 @@ import games from "../../mock_data/game-data";
 import characterImages from "../../utils/characterImages";
 import secondsToMinutes from "../../utils/secondsToMinutes";
 import Header from "../../components/Header/Header";
+import CharacterMenu from "./components/CharacterMenu";
+import ScoreForm from "./components/ScoreForm";
 import Loading from "../../components/Loading/Loading";
 
 export default function Game() {
@@ -33,6 +35,7 @@ export default function Game() {
             setCharacters(game.characters.map(c => ({
                 id: c.id,
                 name: c.name,
+                img: characterImages[c.id],
                 xMin: c.xMin,
                 xMax: c.xMax,
                 yMin: c.yMin,
@@ -42,6 +45,16 @@ export default function Game() {
         }
         initCharacters();
     },[game]);
+
+    // Check if all characters found when characters array changes
+    useEffect(() => {
+        if (!characters) return;
+        const allFound = characters.every(c => c.found);
+
+        // If all characters are found, end the game
+        const endGame = () => { setGameEnd(true); }
+        if (allFound) endGame();
+    }, [characters]);
 
     // Increment game timer each second using interval
     useEffect(() => {
@@ -93,9 +106,9 @@ export default function Game() {
                     {/* Container for character images */}
                     <div className="character-container">
                         {characters && characters.map((c) => (
-                            <img className="character-img"
+                            <img className={`character-img ${c.found ? "found" : ""}`}
                                 key={c.id}
-                                src={characterImages[c.id]}
+                                src={c.img}
                                 alt={c.name}
                             />
                         ))}
@@ -108,11 +121,18 @@ export default function Game() {
                 {/* Game scene image */}
                 <img className="game-img" src={game.image} onClick={gameClick} alt={`Image for ${game.name}`}/>
 
-                {/* TODO: Conditionally render character-select menu */}
-                {/* {showCharacterMenu && lastClick && !gameEnd && <CharacterMenu />}  */}
+                {/* Conditionally render character-select menu */}
+                {showCharacterMenu && lastClick && !gameEnd && (
+                    <CharacterMenu
+                        lastClick={lastClick}
+                        characters={characters}
+                        setCharacters={setCharacters}
+                        setShowCharacterMenu={setShowCharacterMenu}
+                    />
+                )}
 
-                {/* TODO: Conditionally render game score form */}
-                {/* {gameEnd && <ScoreForm />}  */}
+                {/* Conditionally render game-score form */}
+                {gameEnd && <ScoreForm timer={timer} gameId={id} />} 
             </section>
         </>
     );
