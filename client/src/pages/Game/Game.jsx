@@ -16,8 +16,33 @@ export default function Game() {
     // ----- STATES -----
     const [gameEnd, setGameEnd] = useState(false); // Game End state
     const [timer, setTimer] = useState(0); // Game timer state
+    const [lastClick, setLastClick] = useState(null); // Coordinates of last click
+    const [showCharacterMenu, setShowCharacterMenu] = useState(false); // Whether to render character menu
+    const [characters, setCharacters] = useState(null); // Game character data
 
     // ----- EFFECTS -----
+    useEffect(() => {
+        // Return if game data not yet fetched
+        if(!game) return;
+
+        // Change document title
+        document.title = `${game.name} - Where's Waldo?`;
+
+        // Init characters array for this game
+        function initCharacters() {
+            setCharacters(game.characters.map(c => ({
+                id: c.id,
+                name: c.name,
+                xMin: c.xMin,
+                xMax: c.xMax,
+                yMin: c.yMin,
+                yMax: c.yMax,
+                found: false,
+            })));
+        }
+        initCharacters();
+    },[game]);
+
     // Increment game timer each second using interval
     useEffect(() => {
         // Don't run timer while loading or game has ended
@@ -30,9 +55,27 @@ export default function Game() {
         return () => clearInterval(interval);
     },[loading, gameEnd]);
 
+    // ----- FUNCTIONS -----
+    const gameClick = (event) => {
+        // If character menu is already open, close it then return early
+        if(showCharacterMenu) {
+            setShowCharacterMenu(false);
+            return;
+        }
+
+        // Convert click position to natural image coordinates
+        const rect = event.target.getBoundingClientRect();
+        const clickX = (event.clientX - rect.left) * (event.target.naturalWidth / rect.width);
+        const clickY = (event.clientY - rect.top) * (event.target.naturalHeight / rect.height);
+
+        // Save click location and open character menu
+        setLastClick({ x: clickX, y: clickY });
+        setShowCharacterMenu(true);
+    }
+
     // ----- RENDER -----
     // If still loading, render loading component
-    if(loading) return(
+    if(loading || !game) return(
         <>
             <Header />
             <Loading message={"Loading..."} verticalOffset='10rem' />
@@ -43,12 +86,13 @@ export default function Game() {
             {/* Render Header */}
             <Header />
 
+            {/* Render game section content */}
             <section className="game">
-                {/* Render game info */}
+                {/* Game info */}
                 <div className="game-info">
                     {/* Container for character images */}
                     <div className="character-container">
-                        {game.characters.map((c) => (
+                        {characters && characters.map((c) => (
                             <img className="character-img"
                                 key={c.id}
                                 src={characterImages[c.id]}
@@ -61,9 +105,14 @@ export default function Game() {
                     <p className="timer">{secondsToMinutes(timer)}</p>
                 </div>
 
-                {/* Render game scene image */}
-                <img className="game-img" src={game.image} alt={`Image for ${game.name}`}/>
-                
+                {/* Game scene image */}
+                <img className="game-img" src={game.image} onClick={gameClick} alt={`Image for ${game.name}`}/>
+
+                {/* TODO: Conditionally render character-select menu */}
+                {/* {showCharacterMenu && lastClick && !gameEnd && <CharacterMenu />}  */}
+
+                {/* TODO: Conditionally render game score form */}
+                {/* {gameEnd && <ScoreForm />}  */}
             </section>
         </>
     );

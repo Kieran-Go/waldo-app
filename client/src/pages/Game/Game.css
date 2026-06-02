@@ -42,6 +42,9 @@
 
 /* Styles for game image */
 .game-img{
-    width: 100%;
-    margin-top: 2px;
+    display: block;
+    max-width: 99%;
+    width: auto;
+    height: auto;
+    margin: 10px auto 10px;
 }
