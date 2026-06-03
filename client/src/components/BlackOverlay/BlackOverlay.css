@@ -1,0 +1,20 @@
+/* Styles for the black overlay */
+.black-overlay {
+  position: fixed;
+  inset: 0;
+}
+
+/* Fading in animation */
+.fade-in{
+  animation: fadeInOverlay 0.3s ease forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

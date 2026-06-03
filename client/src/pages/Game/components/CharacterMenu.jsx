@@ -1,19 +1,16 @@
+import "./CharacterMenu.css";
 import withinRange from "../../../utils/withinRange";
+import BlackOverlay from "../../../components/BlackOverlay/BlackOverlay";
 
 export default function CharacterMenu({ lastClick, characters, setCharacters, setShowCharacterMenu }) {
     // ----- FUNCTIONS -----
     const clickCharacter = (c) => {
-        // Check that click is within range of character coordinates
-        let found = (
-            withinRange(lastClick.x, c.xMin, c.xMax) &&
-            withinRange(lastClick.y, c.yMin, c.yMax)
-        );
-
-        if(found) {
+        // IF click is within range of character coordinates
+        if(withinRange(lastClick.x, c.xMin, c.xMax) && withinRange(lastClick.y, c.yMin, c.yMax)) {
             // Mark character as found
             setCharacters(prevCharacters => 
                 prevCharacters.map(pc => 
-                    pc.id === c.id ? { ...c, found: true } : pc
+                    pc.id === c.id ? { ...pc, found: true } : pc
                 )
             );
         }
@@ -24,16 +21,19 @@ export default function CharacterMenu({ lastClick, characters, setCharacters, se
 
     // ----- RENDER -----
     return (
-        <div className="character-menu">
-            {characters
-                .filter(c => !c.found)
-                .map(c => (
-                    <button key={c.id} onClick={() => clickCharacter(c)}>
-                        <img src={c.img} alt={c.name} />
-                        {c.name}
-                    </button>
-                ))
-            }
-        </div>
+        <>
+            <BlackOverlay zIndex={999} onClick={() => setShowCharacterMenu(false)}/>
+            <div className="character-menu">
+                {characters
+                    .filter(c => !c.found)
+                    .map(c => (
+                        <button key={c.id} onClick={() => clickCharacter(c)}>
+                            <img src={c.img} alt={c.name} />
+                            {c.name}
+                        </button>
+                    ))
+                }
+            </div>
+        </>
     );
 }

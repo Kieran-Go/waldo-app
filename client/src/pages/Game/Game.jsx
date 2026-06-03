@@ -70,12 +70,6 @@ export default function Game() {
 
     // ----- FUNCTIONS -----
     const gameClick = (event) => {
-        // If character menu is already open, close it then return early
-        if(showCharacterMenu) {
-            setShowCharacterMenu(false);
-            return;
-        }
-
         // Convert click position to natural image coordinates
         const rect = event.target.getBoundingClientRect();
         const clickX = (event.clientX - rect.left) * (event.target.naturalWidth / rect.width);

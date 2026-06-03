@@ -1,0 +1,42 @@
+/* Character menu container */
+.character-menu{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    background-color: var(--fg-color);
+    border: solid black 4px;
+    border-radius: 12px;
+    justify-content: space-around;
+    width: fit-content;
+    gap: 2rem;
+    padding: 2rem;
+    z-index: 1000;
+}
+
+/* Character menu button */
+.character-menu button{
+    width: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-color);
+    border-radius: 12px;
+    cursor: pointer;
+    font-style: italic;
+    font-weight: bold;
+    color: var(--lt-blue);
+}
+    /* Hover psuedo-class */
+    .character-menu button:hover{
+        background-color: var(--lt-blue);
+        color: white;
+    }
+
+/* Styles for image inside character menu button */
+.character-menu button img{
+    width: 45px;
+    height: 50px;
+}
